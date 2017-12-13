@@ -1,0 +1,160 @@
+html, body{
+    margin: 0px;
+    font-size: 12px;
+}
+p, h1, h2, h3, h4, h5, h6{
+    margin: 0px;
+}
+
+@font-face {
+    font-family: 'Material Icons';
+    font-style: normal;
+    font-weight: 400;
+    src: url("./iconfont/MaterialIcons-Regular.eot"); /* For IE6-8 */
+    src: local('Material Icons'),
+      local('MaterialIcons-Regular'),
+      url("./iconfont//MaterialIcons-Regular.woff2") format('woff2'),
+      url("./iconfont//MaterialIcons-Regular.woff") format('woff'),
+      url("./iconfont//MaterialIcons-Regular.ttf") format('truetype');
+}
+
+.material-icons {
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;  /* Preferred icon size */
+    display: inline-block;
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+    white-space: nowrap;
+    direction: ltr;
+  
+    /* Support for all WebKit browsers. */
+    -webkit-font-smoothing: antialiased;
+    /* Support for Safari and Chrome. */
+    text-rendering: optimizeLegibility;
+  
+    /* Support for Firefox. */
+    -moz-osx-font-smoothing: grayscale;
+  
+    /* Support for IE. */
+    font-feature-settings: 'liga';
+}
+
+
+#header{
+    height:10vh;
+    background: rgba(0,0,255,0.5);
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+#header .game-icon-panel .game-icon{
+    margin: 0 0.5em;
+}
+#header .game-icon-panel{
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.content{
+    height: 80vh;
+    overflow: auto;
+}
+#footer{
+    height: 10vh;
+    background: rgba(0,0,0,0.15);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    margin: auto;
+}
+#footer .footer-icon-panel{
+    align-self: stretch;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex: 25;
+    align-items: center;
+}
+/**
+* it for for signup section
+*/
+
+#signup{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    height: 100%;
+}
+#signup .next{
+    margin-left: -5em;
+    font-size: 2em;
+}
+#signup input[type='text']{
+    text-align: center;
+}
+
+#home{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    height: 100%;
+}
+#home .btn{
+    background: rgb(145, 140, 254);
+    width: 8em;
+}
+input[type='text']{
+    height: 3em;
+    font-size: 2em;
+    border: 0px;
+    border-bottom: 1px solid;
+}
+input[type='text']:active, input[type='text']:focus{
+    border-bottom: 2px solid rgba(0,0,255,0.5);
+}
+.btn{
+    height: 3em;
+    font-size: 2em;
+    margin: 1em 0;
+}
+.btn.fab{
+    width: 4em;
+    height: 4em;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+@media (orientation: landscape){
+    #header{
+        height: 15vh;
+    }
+    #footer {
+        height: 15vh;
+    }
+    .content{
+        height: 70vh;
+        overflow: auto;
+    }
+    .btn{
+        height: 2em;
+        font-size: 1.8em;
+    }
+    input[type='text']{
+        height: 2em;
+        font-size: 1.8em;
+        margin: 0.6em 0;
+    }
+}
