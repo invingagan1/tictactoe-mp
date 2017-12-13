@@ -1,7 +1,7 @@
 var Router = Backbone.Router.extend({
     routes: {
         'home': 'home',
-        'game':'game',
+        'game/:type':'game',
         'player':'player',
         'settings':'settings',
         'signup': 'signUpPlayer',
@@ -10,20 +10,19 @@ var Router = Backbone.Router.extend({
     home: function(){
         app.goToHome();
     },
-    game: function(){
-        app.playGame()
+    game: function(type){
+        app.playGame(type);
     },
     player: function(){
-        app.goToPlayer()
+        app.goToPlayer();
     },
     settings: function(){
-        app.goToSettings()
+        app.goToSettings();
     },
     signUpPlayer: function(){
         app.signUpPlayer();
     },
     noRoute: function(){
-        console.log("no route");
-        app.router.navigate('signup', true);
+        app.router.navigate('signup', {trigger: true});
     }
 });

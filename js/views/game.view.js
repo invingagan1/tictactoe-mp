@@ -1,5 +1,5 @@
 var Game = Backbone.View.extend({
-    initialize: function(){
+    initialize: function(params){
         this.render();
     },
     render: function(){

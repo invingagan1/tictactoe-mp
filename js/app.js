@@ -17,21 +17,21 @@ var app = {
         this.initViews();      
         Backbone.history.start();
 
-        // this.router.navigate("signup", true);
+        // this.router.navigate("signup", {trigger: true});
         storageSrevice.getData("tictactoe").then((function(data){
             if(data == undefined){
-                this.router.navigate("signup", true);
+                this.router.navigate("signup", {trigger: true});
             }else{
                 if(data.name == undefined){
-                    this.router.navigate("signup", true);
+                    this.router.navigate("signup", {trigger: true});
                 }else{
                     console.log("welcome back " + data.name);
-                    this.router.navigate("home", true);
+                    this.router.navigate("home", {trigger: true});
                 }
             }
         }).bind(this) ).catch((function(){
-            this.router.navigate("signup", true);
-        }).bind(this) )
+            this.router.navigate("signup", {trigger: true});
+        }).bind(this));
     },
     initViews: function(){
         this.content = $("#content");

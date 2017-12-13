@@ -18,7 +18,7 @@ var SignUp = Backbone.View.extend({
         var name = this.$el.find('input[name="name"]').val();
         if(name !== undefined && name !=="" && name.charAt(0) !== " " ){
             setupService.setup(name).then(function(){
-                app.router.navigate('home', true)
+                app.router.navigate('home', {trigger: true});
             }).catch(function(){
                 alert("Could not setup! try again.");
             });
