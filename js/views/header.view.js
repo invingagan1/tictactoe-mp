@@ -4,7 +4,6 @@ var Header = Backbone.View.extend({
         this.render();
     },
     events: {
-        'click .game-icon-panel' : 'gotoHome'
     },
     render: function(){
         this.$el.html(this.template);

@@ -1,7 +1,10 @@
 var app = {
     router: null,
     content:null,
-
+    players:{
+        computer:null,
+        me:null,
+    },
     views: {
         header: null,
         footer: null,
@@ -16,22 +19,20 @@ var app = {
         
         this.initViews();      
         Backbone.history.start();
-
-        // this.router.navigate("signup", {trigger: true});
-        storageSrevice.getData("tictactoe").then((function(data){
-            if(data == undefined){
-                this.router.navigate("signup", {trigger: true});
+        
+        storageSrevice.getPlayers().then( (function(players){
+            if(players === null || players === undefined){
+                app.router.navigate('setup',{trigger: true});
             }else{
-                if(data.name == undefined){
-                    this.router.navigate("signup", {trigger: true});
-                }else{
-                    console.log("welcome back " + data.name);
-                    this.router.navigate("home", {trigger: true});
+                for(var p in players){
+                    app.players[p] = new Player(players[p]);
                 }
+                app.router.navigate('home',{trigger: true});
             }
-        }).bind(this) ).catch((function(){
-            this.router.navigate("signup", {trigger: true});
-        }).bind(this));
+        }).bind(this) ).catch( (function(e){
+            console.error(e);
+            app.router.navigate('setup',{trigger: true})
+        }).bind(this) );
     },
     initViews: function(){
         this.content = $("#content");
@@ -48,9 +49,10 @@ var app = {
         this.content.html(this.views.home.el);    
     },
     playGame: function(){
-        if(this.views.game === null){
-            this.views.game = new Game();
-        }
+        // if(this.views.game === null){
+            this.views.game = null;
+            this.views.game = new GameView();
+        // }
         this.content.html(this.views.game.el);
     },
     goToPlayer: function(){

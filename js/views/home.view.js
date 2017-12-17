@@ -14,6 +14,6 @@ var Home = Backbone.View.extend({
                     <button class="btn mp">Play online</button>\
                     <button class="btn cf">Challenge friend</button>',
     playSolo: function(){
-        app.router.navigate("game/solo", {trigger: true});
+        app.router.navigate("game", {trigger: true});
     }
 });
