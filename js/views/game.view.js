@@ -10,7 +10,7 @@ var GameView = Backbone.View.extend({
     initialize: function(){
         this.$template = $(this.template);
         
-        game = new Game(Game.typeEnum._3X3, _.clone(app.players));
+        game = new Game(Game.typeEnum._ , _.clone(app.players));
         
         this.createPlayers();
         this.createGameBaord();
@@ -18,28 +18,24 @@ var GameView = Backbone.View.extend({
         this.render();
     },
     events:{
-        'click .element' : 'play'
     },
     render: function(){
         this.$el.html(this.$template);
+        setTimeout(game.start.bind(game),100);
         return this;
-    },
-    play: function(){
-        console.log(this)
     },
     createPlayers: function(){
         this.$players = this.$template.find('.player-section');
         for(var p in game.players){
             var player = game.players[p];
             var $player = $(PlayerTemplate);
+            $player.attr('key', p);
             $player.find('.icon').html(Element_Icons_Enum[player.get('elementType')]);
             $player.find('.name').html(player.get('name'));
-            $player.addClass(game.activePlayer === p ? 'active' :'');
             this.$players.append($player);
         }
     },
     createGameBaord: function(){
-        console.log(game.elements.length);
         this.$board = this.$template.find('.board');
         for(var r = 0; r < game.elements.length ; r++){
             
@@ -49,7 +45,9 @@ var GameView = Backbone.View.extend({
             for(var c = 0; c < row.length; c++){
                 var element = game.elements[r][c];
                 var $element = $(Element_Template);
+                $element.attr('id', element.get('id'));
                 $element.data('elementId', element.get('id'));
+                $element.click(function(){game.playMove(this)});
                 $row.append($element);
             }
             this.$board.append($row);
@@ -66,7 +64,12 @@ var GameView = Backbone.View.extend({
             boardHeight = windowWidth;
         }
         var elementWidth = (boardWidth /  game.type) - 4;
-        this.$board.width(boardWidth).height(boardHeight).find('.element').width(elementWidth).height(elementWidth)
+        this.$board.width(boardWidth).height(boardHeight).find('.element').width(elementWidth).height(elementWidth);
+        this.$board.width(boardWidth).height(boardHeight).find('.element > i').css({'font-size': elementWidth})
     },
-    template : '<div id="game-arena"><div class="player-section"></div><div class="board"></div><div>'
+    template : '<div id="game-arena"><div class="player-section"></div><div class="board"></div><div>',
+    updateActivePlayer: function(activePlayer){
+        this.$players.find('.player').removeClass('active');
+        this.$players.find('[key='+activePlayer +']').addClass(game.activePlayer === activePlayer ? 'active' :'');
+    }
 });

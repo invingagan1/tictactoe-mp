@@ -2,7 +2,7 @@ var PLAYER_TYPE = {
     'PLAYER':0,
     'COMPUTER':1
 }
-var PlayerTemplate = '<div class="player"><i class="material-icons icon"></i><p class="name"></p></div>';
+var PlayerTemplate = '<div class="player" id=""><i class="material-icons icon"></i><p class="name"></p></div>';
 
 var Player = Backbone.Model.extend({
     defaults:{
