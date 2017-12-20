@@ -10,7 +10,7 @@ var GameView = Backbone.View.extend({
     initialize: function(){
         this.$template = $(this.template);
         
-        game = new Game(Game.typeEnum._ , _.clone(app.players));
+        game = new Game(Game.typeEnum._3X3, _.clone(app.players));
         
         this.createPlayers();
         this.createGameBaord();

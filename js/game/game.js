@@ -40,7 +40,10 @@ Game.prototype = {
         this.activePlayer = activePlayer;
         app.views.game.updateActivePlayer(activePlayer);
         if(this.activePlayer === 'computer'){
-            this.computerWillMove();
+            setTimeout((function(){
+                this.computerWillMove();
+            }).bind(this), 100);
+            
         }else if(this.activePlayer === 'me'){
             console.log('i will play ');
         }else{
@@ -58,6 +61,7 @@ Game.prototype = {
             
             if(!element.get('isSelected')){
                 element.set('type', elementType);
+                element.set('player', this.activePlayer);
                 $element.find('.icon').html(Element_Icons_Enum[elementType]);
                 element.set('isSelected', true);
                 this.switchPlayer();
@@ -69,6 +73,10 @@ Game.prototype = {
         //is coloumn checked?
         // is crossed checked?
         var isGameOver = false;
+        var isRowWin = this.checkRowWin();
+        if(isRowWin !== false){
+            isGameOver = true;
+        }
         return isGameOver;
     },
     switchPlayer: function(){
@@ -96,6 +104,7 @@ Game.prototype = {
 
         var $element = $('#'+element.get('id'));
         element.set('type', elementType);
+        element.set('player', this.activePlayer);
         $element.find('.icon').html(Element_Icons_Enum[elementType]);
         element.set('isSelected', true);
         this.switchPlayer();
@@ -104,5 +113,21 @@ Game.prototype = {
         var result = true;
         return true;
     },
-
+    checkRowWin: function(){
+        var result = false;
+        var winArr = new Array(this.setToWin).fill(1);
+        var winStr = winArr.join('');
+        for(var r = 0; r < this.type; r++){
+            var colArr = [];
+            for(var c=0; c < this.type; c++){
+                colArr.push(this.elements[r][c].get('isSelected') ? 1:0);
+            }
+            var colStr = colArr.join('');
+            var winIndex = colStr.indexOf(winStr);
+            if(winIndex != -1){
+                result = this.elements[r][winIndex].get('id');
+            }
+        }
+        return result;
+    }
 };

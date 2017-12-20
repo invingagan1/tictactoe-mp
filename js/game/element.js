@@ -11,7 +11,8 @@ var Element = Backbone.Model.extend({
         row:0,
         col:0,
         type: Element_Type_Enum.NOT_SET,
-        isSelected: false
+        isSelected: false,
+        player:null
     },
     initialize: function(){
     }
